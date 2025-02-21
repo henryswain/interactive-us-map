@@ -5,8 +5,9 @@ def application(environ, start_response):
     # connect
     dbcnx = pymysql.connect(host="webdev.divms.uiowa.edu",port=3306,user="henryswain",passwd="AgRZXxndJYXOIStHrDqk",db="cs3910_henryswain")
    
+    print("line before query")
     sqlquery="""SELECT * FROM us_states;"""
-   
+    print("line after query")
     # create a database cursor
     cursor = dbcnx.cursor() 
    
@@ -22,6 +23,7 @@ def application(environ, start_response):
 
         # Convert result to JSON
     json_result = json.dumps(result)
+    print("json_result: ", json_result)
 
     # Send response
     start_response('200 OK',
