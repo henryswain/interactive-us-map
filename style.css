@@ -2,13 +2,13 @@
 
 path {
     stroke: white;
-    fill:paleturquoise !important;
+    fill:#3DB6EB !important;
 
     transition: fill .4s ease;
 }
 
 path:hover {
-    fill: orange !important;
+    fill: #4283EB !important;
 }
 
 #us-map {
@@ -27,7 +27,7 @@ path:hover {
     position: fixed;
     color: white;
     font-family: "Poppins";
-    background-color: black;
+    background-color: #3DEBAD;
     width: fit-content;
     transform: translateX(-50%);
     transition: opacity .4s ease;
