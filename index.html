@@ -10,7 +10,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body style="background-color: #D0F5F0;">
-    <div id="details-box"></div>
+    <div id="details-box">
+        <h3 id="state"></h3>
+        <p id="population"></p>
+        <p id="aveAge"></p>
+        <p id="capital"></p>
+    </div>
     <svg
         xmlns:dc="http://purl.org/dc/elements/1.1/"
         xmlns:cc="http://creativecommons.org/ns#"
@@ -448,29 +453,41 @@
         var tooltipSpan = document.getElementById('details-box');
 
         document.addEventListener('mouseover', function (e) {
-            fetch('https://webdev.divms.uiowa.edu/webdev/cs3910/henryswain/hw3javascript.wsgi')
-                .then(response => {
-                    if (!response.ok) {
-                    throw new Error('Network response was not ok');
+            fetch('https://webdev.divms.uiowa.edu/webdev/cs3910/henryswain/hw3javascript/us_states.wsgi')
+                .then(response => response.json())
+                    // if (!response.ok) {
+                    // throw new Error('Network response was not ok');
+                    // }
+                    // console.log("response.json: ", response)
+                .then((data) => {
+                    console.log("data: ", data)
+                    console.log("e: ", e)
+                    if (e.target.tagName == 'path') {
+                        console.log("inside if statement")
+                        var content = e.target.dataset.name;
+                        for (let i of data) {
+                            console.log("inside for loop")
+                            if (i.State == content) {
+                                // document.getElementById("details-box").innerHTML = `${i.State}\nPopulation: ${i.Population}\nMedian Age: ${i.Median_age}\nCapital: ${i.Capital}`;
+                                document.getElementById("state").innerHTML = i.State
+                                document.getElementById("population").innerHTML = `Population: ${i.Population}`
+                                document.getElementById("aveAge").innerHTML = `Median Age: ${i.Median_age}`
+                                document.getElementById("capital").innerHTML = `Capital: ${i.Capital}`
+                                document.getElementById("details-box").style.opacity = "100%";
+                            }
+                        }
                     }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log(data);
+                  
+                    else {
+                        document.getElementById("details-box").style.opacity = "0%";
+                    }
+        
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);
                 });
 
-            console.log("e: ", e)
-            if (e.target.tagName == 'path') {
-                var content = e.target.dataset.name;
-                document.getElementById("details-box").innerHTML = content;
-                document.getElementById("details-box").style.opacity = "100%";
-            }
-            else {
-                document.getElementById("details-box").style.opacity = "0%";
-            }
+     
         });
 
         window.onmousemove = function (e) {
