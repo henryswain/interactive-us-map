@@ -9,7 +9,7 @@ def application(environ, start_response):
     sqlquery="""SELECT * FROM us_states;"""
     print("line after query")
     # create a database cursor
-    cursor = dbcnx.cursor() 
+    cursor = dbcnx.cursor(pymysql.cursors.DictCursor) 
    
     # execute SQL select 
     cursor.execute(sqlquery)
@@ -22,7 +22,7 @@ def application(environ, start_response):
     dbcnx.close ()
 
         # Convert result to JSON
-    json_result = json.dumps(result)
+    json_result = json.dumps(list(result))
     print("json_result: ", json_result)
 
     # Send response
