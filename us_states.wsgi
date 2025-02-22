@@ -30,7 +30,7 @@ def application(environ, start_response):
         start_response('200 OK', [
             ('Content-Type', 'application/json'),
             ('Access-Control-Allow-Origin', '*'),
-            ('Access-Control-Allow-Methods', 'GET'),
+            ('Access-Control-Allow-Methods', 'GET, OPTIONS'),
             ('Access-Control-Allow-Headers', 'Content-Type')
         ])
         return [json_result.encode('utf-8')]
