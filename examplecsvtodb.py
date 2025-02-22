@@ -14,7 +14,7 @@ cur = db.cursor()
 cur.execute("DROP TABLE IF EXISTS us_states;")
 db.commit()
 #In this example has column Name and column gpa
-create_SQL="""CREATE TABLE IF NOT EXISTS us_states (State VARCHAR(20), Population int, Median_age DECIMAL(3, 1), Capital VARCHAR(20));"""
+create_SQL="""CREATE TABLE IF NOT EXISTS us_states (State VARCHAR(20), Population int, Median_age FLOAT(3, 1), Capital VARCHAR(20));"""
 #Below print can be used to check what command it tries to execute in next line
 #print (create_SQL)
 cur = db.cursor()
